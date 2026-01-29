@@ -131,7 +131,9 @@ class App:
             ret, frame = cap.read()
             if not ret: break
 
+            # i used ultralytics built in BoT-SORT tracker to maintain unique vehicle IDs across frames
             res = model.track(frame, persist=True)[0]
+
             frame = self.draw(res, frame)
             out.write(frame)
 
