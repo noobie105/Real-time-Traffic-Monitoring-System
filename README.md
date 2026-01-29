@@ -19,11 +19,10 @@ Build and deploy a low-latency object detection + tracking system that:
 - **Hardware Awareness**: GPU support (CUDA) with CPU fallback; metrics via psutil & GPUtil
 
 ## Project Structure
-real-time-traffic-monitoring-system/
+real-time-traffic-monitoring-system
 ├── GUI.py                  # Main application with Tkinter GUI and YOLO inference
-├── best.pt                 # Fine-tuned YOLOv8m model weights
-├── requirements.txt        # Dependencies
-└── processed_video.mp4     # Example annotated output
+├── Real-time Traffic Monitoring System.ipynb     # Fine-tuned YOLOv8m model
+└── requirements.txt        # Dependencies
 
 ## Setup & Installation
 1. Clone the repository:
