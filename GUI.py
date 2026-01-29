@@ -8,14 +8,18 @@ import GPUtil
 from ultralytics import YOLO
 import torch
 import threading
+import onnxruntime as ort
 
-MODEL = r'C:\Users\USER\Downloads\Regnum-20260129T090605Z-3-001\Regnum\runs\regnum_traffic_model\weights\best.pt'
-VIDEO_IN = r'C:\Users\USER\Downloads\Regnum-20260129T090605Z-3-001\Regnum\Video\Supporting video for Dataset-3.mp4'
+MODEL = r'C:\Users\USER\Downloads\Regnum AI Engineer Technical Assessment\Model Training\runs\regnum_traffic_model\weights\best.onnx'
+VIDEO_IN = r'C:\Users\USER\Downloads\Regnum AI Engineer Technical Assessment\Model Training\Video\Supporting video for Dataset-3.mp4'
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
+device = 0 if torch.cuda.is_available() else 'cpu'
 print(f"Using device: {device}")
-model = YOLO(MODEL).to(device)
 
+model = YOLO(MODEL)
+
+providers = ['CUDAExecutionProvider'] if isinstance(device, int) else ['CPUExecutionProvider']
+ort_session = ort.InferenceSession(MODEL, providers=providers)
 
 class App:
     def __init__(self, root):
@@ -72,7 +76,7 @@ class App:
                 self.stop()
                 break
 
-            # i used ultralytics built in BoT-SORT tracker to maintain unique vehicle IDs across frames
+            # i used ultralytics built-in BoT-SORT trackerto to maintain unique vehicle IDs across frames
             res = model.track(frame, persist=True, imgsz=640, device=device)[0]
             self.n = len(res.boxes)
 
