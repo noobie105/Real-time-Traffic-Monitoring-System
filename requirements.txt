@@ -6,3 +6,4 @@ GPUtil
 ultralytics
 torch
 numpy
+onnxruntime
