@@ -1,0 +1,8 @@
+opencv-python
+tk
+Pillow
+psutil
+GPUtil
+ultralytics
+torch
+numpy
